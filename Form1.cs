@@ -152,10 +152,40 @@ namespace My90Tank
 
             }
             num++;
-            label2.Text = Scene.Instance.P1Play.life.ToString();
+            //更新标签
+            if (Scene.Instance.P1Play != null)
+                label2.Text = Scene.Instance.P1Play.life.ToString();
+            else label2.Text = "已死亡";
+            if (Scene.Instance.P2Play != null)
+                label3.Text = Scene.Instance.P2Play.life.ToString();
+            else label3.Text = "已死亡";
             label6.Text = Scene.Instance.killnum.ToString();
+          //更新生命条
+            if(Scene.Instance.boss!=null)
+            progressBar1.Value =Scene.Instance.boss.life;
+            
+            //游戏结束判定
+            //BOSS死亡游戏结束
+            if(Scene.Instance.win==1)
+            {
+
+                timer1.Stop();
+                MessageBox.Show("You are winner");
+                this.Close();
+            }
+            //都死亡游戏结束
+            if (Scene.Instance.P1Play == null && Scene.Instance.P2Play == null)
+            {
+                
+                timer1.Stop();
+                MessageBox.Show("You are loser");
+                this.Close();
+            }
+
+
 
             this.pictureBox1.Invalidate();
+           
 
             
         }
@@ -201,5 +231,17 @@ namespace My90Tank
         {
             
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+   
     }
 }

@@ -3,7 +3,7 @@
   <Class Name="My90Tank.Scene">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gxCJAAQABAIRAgAAAAAIQMAAAADCCMJCQAIAAACAQAA=</HashCode>
+      <HashCode>gxCJAAQABAIRQgAAAAAIQMAAAADCCMJCQAIAAACQQAA=</HashCode>
       <FileName>Scene.cs</FileName>
     </TypeIdentifier>
   </Class>

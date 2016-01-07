@@ -103,7 +103,7 @@ namespace My90Tank
         {
             Random r = new Random((int)DateTime.Now.Ticks);
             int a = r.Next(50);
-            if (a < 5)
+            if (a < 40)
                 return;
             int xx = this.X, yy = this.Y;
             switch (this.direct)

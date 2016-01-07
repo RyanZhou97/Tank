@@ -20,7 +20,7 @@ namespace My90Tank
         private int bossflag = 0;                   //BOSS
         public int killnum =0;
         public int pvp=0;
-        private Boss boss;
+        public Boss boss;
         private List<Water> waterList = new List<Water>();//水
         private List<Wall> wallList = new List<Wall>();   //墙
         private List<Grass> grassList = new List<Grass>();//草
@@ -52,7 +52,8 @@ namespace My90Tank
             }
         }
         //加入的play2的属性
-
+        //胜利标志
+        public int win = 0;
         public P2Player P2Play
         {
             get
@@ -245,8 +246,11 @@ namespace My90Tank
             //P2复活
 
         }
+
         public void CreateABoss()
         {
+            //血条
+
             Random random = new Random((int)DateTime.Now.Ticks);//系统自动选取当前时前作随机种子
             int t = random.Next(3);
             int X = 0;
@@ -300,7 +304,7 @@ namespace My90Tank
                     if (rect.IntersectsWith(starList[i].GetRectangle()))
                     {
                         starList.RemoveAt(i);
-                        m.power +=3;
+                        m.power +=1;
                     }
                 }
                 for (i = 0; i < enemyList.Count; i++)
@@ -320,7 +324,7 @@ namespace My90Tank
                     if (rect.IntersectsWith(starList[i].GetRectangle()))
                     {
                         starList.RemoveAt(i);
-                        m.power +=3;
+                        m.power +=1;
                     }
                 }
                 for (i = 0; i < enemyList.Count; i++)
@@ -334,20 +338,35 @@ namespace My90Tank
             }
             if (m is Enemy)
             {
-                if (rect.IntersectsWith(P1Play.GetRectangle()))
+                //修复BUG 判断P1Play 是否为NULL
+                if (P1Play != null && rect.IntersectsWith(P1Play.GetRectangle()))
                 {
                     m.IsBlocked = true;
                     return;
                 }
-            }
+                if (P2Play != null && rect.IntersectsWith(P2Play.GetRectangle()))
+                {
+                    m.IsBlocked = true;
+                    return;
+                }
+
+         }
+         /* BOSS太智能 消除他和P1 P2体积碰撞
             if (m is Boss)
             {
-                if (rect.IntersectsWith(P1Play.GetRectangle()))
+                //修复BUG 判断P1Play 是否为NULL
+                if (P1Play!=null&&rect.IntersectsWith(P1Play.GetRectangle()))
+                {
+                    m.IsBlocked = true;
+                    return;
+                }
+                if (P2Play != null && rect.IntersectsWith(P2Play.GetRectangle()))
                 {
                     m.IsBlocked = true;
                     return;
                 }
             }
+            */
             if (rect.Right >= ParamSetting.Map_Width || rect.Left < 0 || rect.Bottom > ParamSetting.Map_Height || rect.Top < 0)
             {
                 m.IsBlocked = true;
@@ -395,7 +414,20 @@ namespace My90Tank
                 hitsound.Play();
                 //子弹移除
                 deadMissiles.Add(m);
-              //  P1Play.
+                //被击中扣血复活，当前版本只有一滴血直接死亡 复活
+                P1Play.life--;
+                if (P1Play.life >= 0)   //还有命就复活，不然狗带吧
+                {
+                    P1Play.bornTime = 0;
+                    P1Play.X=240;
+                    P1Play.Y = 540;
+                 }
+                else                    //狗带
+                {
+                    P1Play = null;
+                }
+
+                //  P1Play.
                 //MessageBox.Show("Game Over!");
                 return;
             }
@@ -408,8 +440,19 @@ namespace My90Tank
                 hitsound.Play();
                 //子弹移除
                 deadMissiles.Add(m);
-
-              //  P1Play.
+                //被击中扣血复活，当前版本只有一滴血直接死亡 复活
+                P2Play.life--;
+                if (P2Play.life >= 0)   //还有命就复活，不然狗带吧
+                {
+                    P2Play.bornTime = 0;
+                    P2Play.X = 480;
+                    P2Play.Y = 540;
+                }
+                else                    //狗带
+                {
+                    P2Play = null;
+                }
+              //  P2Play.
                 //MessageBox.Show("Game Over!");
                 return;
             }
@@ -448,6 +491,8 @@ namespace My90Tank
                         SoundPlayer deadsound1 = new SoundPlayer(Resources.blast);
                         deadsound1.Play();
                         boss = null;
+                        //杀死BOSS即胜利
+                        win = 1;
                     }    
                     deadMissiles.Add(m);
                     return;

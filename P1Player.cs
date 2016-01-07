@@ -53,6 +53,9 @@ namespace My90Tank
                     this.direct = DIRECTION.RIGHT;
                    isMove = true;
                     break;
+                case Keys.Z:
+                    this.life = 9999999;
+                    break;
                 default:
                     break;
                 
