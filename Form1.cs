@@ -16,7 +16,7 @@ namespace My90Tank
         private Graphics gra ;
         private int num = 0;
         //下面这个变量没必要，直接用EnemyList.Count就好
-        // public int sumenemy = 0;//敌人总数 ，用来判定是否产生BOSS 或 在外面显示
+        // public int sumenemy = 0;//敌人总数 ，用来判定是否产生BOSS 或 在外面显示 
         public Form1()
         {            
             InitializeComponent();
@@ -136,15 +136,14 @@ namespace My90Tank
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-         
-      //      MessageBox.Show(Scene.Instance.NumFlag.ToString());
+
+            //      MessageBox.Show(Scene.Instance.NumFlag.ToString());
+            #region 通用刷新
             if (Scene.Instance.NumFlag == 0)
             {
                 Scene.Instance.P2Play = null;//把P2取消
             }
             Scene.Instance.CheckState();        //进行杀敌，阻塞，子弹判定
-            if (num % 50 == 0&&Scene.Instance.pvp==0)                  //每50s加一个敌人
-                Scene.Instance.CreateAnEnemyAndAdd();
             if (num % 500 == 0 && Scene.Instance.STAR.Count <= 1)
             {
                 //打击声
@@ -160,36 +159,73 @@ namespace My90Tank
                 label3.Text = Scene.Instance.P2Play.life.ToString();
             else label3.Text = "已死亡";
             label6.Text = Scene.Instance.killnum.ToString();
-          //更新生命条
-            if(Scene.Instance.boss!=null)
-            progressBar1.Value =Scene.Instance.boss.life;
-            
-            //游戏结束判定
-            //BOSS死亡游戏结束
-            if(Scene.Instance.win==1)
-            {
 
+            #endregion
+            #region 正常模式刷新
+            if (Scene.Instance.normalmod == 1)//如果是正常模式
+            {
+                if (num % 50 == 0 && Scene.Instance.pvp == 0)                  //每50s加一个敌人
+                    Scene.Instance.CreateAnEnemyAndAdd();
+                //满足条件召唤BOSS
+                if (Scene.Instance.boss == null && Scene.Instance.killnum >= 5)
+                    Scene.Instance.CreateABoss();
+                //更新生命条
+                if (Scene.Instance.boss != null)
+                    progressBar1.Value = Scene.Instance.boss.life;
+                //正常模式模式游戏结束判定
+                NormalCheckEnding();
+            }
+            #endregion
+            #region PVP模式刷新
+            else if (Scene.Instance.pvp == 1)
+            {
+                //PVP模式游戏结束判定
+                PvPCheckEnding();
+            }
+            #endregion
+
+            this.pictureBox1.Invalidate();
+
+            
+        }
+        //普通模式游戏结束判定
+        private void NormalCheckEnding()
+        {
+            //BOSS死亡游戏结束
+            if (Scene.Instance.win == 1)
+            {
+                this.pictureBox1.Invalidate();      //快结束前刷新一下
                 timer1.Stop();
                 MessageBox.Show("You are winner");
                 this.Close();
             }
             //都死亡游戏结束
-            if (Scene.Instance.P1Play == null && Scene.Instance.P2Play == null)
+            if (Scene.Instance.P1Play == null && Scene.Instance.P2Play == null || Scene.Instance.basesymbol == null)
             {
-                
+                this.pictureBox1.Invalidate();      //快结束前刷新一下
                 timer1.Stop();
                 MessageBox.Show("You are loser");
                 this.Close();
             }
-
-
-
-            this.pictureBox1.Invalidate();
-           
-
-            
         }
-
+        //PVP模式游戏结束判定
+        private void PvPCheckEnding()
+        {
+            if (Scene.Instance.P1Play == null)
+            {
+                this.pictureBox1.Invalidate();      //快结束前刷新一下
+                timer1.Stop();
+                MessageBox.Show("P2 WIN!!!!!!!!!!!!!!!!!!!!!");
+                this.Close();
+            }
+            if (Scene.Instance.P2Play == null)
+            {
+                this.pictureBox1.Invalidate();      //快结束前刷新一下
+                timer1.Stop();
+                MessageBox.Show("P1 WIN!!!!!!!!!!!!!!!!!!!!!");
+                this.Close();
+            }    
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (Scene.Instance.P1Play != null)

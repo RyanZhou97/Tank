@@ -19,7 +19,8 @@ namespace My90Tank
         private static int numflag=0;               //单双人模式
         private int bossflag = 0;                   //BOSS
         public int killnum =0;
-        public int pvp=0;
+        public int pvp=0;                           //PVP模式FLAG
+        public int normalmod = 0;                   //单双人模式FLAG
         public Boss boss;
         private List<Water> waterList = new List<Water>();//水
         private List<Wall> wallList = new List<Wall>();   //墙
@@ -63,6 +64,17 @@ namespace My90Tank
             set
             {
                 play2 = value;
+            }
+        }
+        public Symbol basesymbol
+        {
+            get
+            {
+                return symbol;
+            }
+            set
+            {
+                symbol = value;
             }
         }
         public List<Star> STAR
@@ -404,10 +416,22 @@ namespace My90Tank
                     return;
                 }
             }
-            
+            //子弹打中老鹰
+            if (basesymbol != null&&pvp==0)
+            {
+                if (m.GetRectangle().IntersectsWith(basesymbol.GetRectangle()))
+                {
+                    //打击声
+                    SoundPlayer hitsound = new SoundPlayer(Resources.hit);
+                    hitsound.Play();
+                    basesymbol = null;
+                    deadMissiles.Add(m);
+                    return;
+                }
+            } 
             //子弹打中P1Play
             if(P1Play!=null)
-            if (m.GetRectangle().IntersectsWith(P1Play.GetRectangle()))
+            if (m.GetRectangle().IntersectsWith(P1Play.GetRectangle())&&P1Play.bornTime==16)
             {
                 //打击声
                 SoundPlayer hitsound = new SoundPlayer(Resources.hit);
@@ -433,7 +457,7 @@ namespace My90Tank
             }
              //子弹打中P2Play
             if(P2Play!=null)
-            if (m.GetRectangle().IntersectsWith(P2Play.GetRectangle()))
+                if (m.GetRectangle().IntersectsWith(P2Play.GetRectangle()) && P2Play.bornTime == 16)
             {
                 //打击声
                 SoundPlayer hitsound = new SoundPlayer(Resources.hit);
@@ -501,9 +525,7 @@ namespace My90Tank
             //子弹进入边缘
             if (m.X == 0 || m.Y == 0 || m.X >= ParamSetting.Map_Width || m.Y >= ParamSetting.Map_Height)
                 deadMissiles.Add(m);
-            //满足条件召唤BOSS
-            if (boss == null && pvp==0)
-            CreateABoss();
+
          //   if (enemyList.Count == 0)
         //    {
        //         MessageBox.Show("You Win!");

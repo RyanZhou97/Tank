@@ -27,6 +27,7 @@ namespace My90Tank
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Scene.Instance.normalmod = 1;
             Scene.Instance.NumFlag = 1;
             player.Stop();
             this.Close();
@@ -34,6 +35,7 @@ namespace My90Tank
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Scene.Instance.normalmod = 1;
             Scene.Instance.NumFlag = 0;
             player.Stop();
             this.Close();
