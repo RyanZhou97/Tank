@@ -16,3 +16,6 @@ C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\obj\x86\Debug\My90Ta
 C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\obj\x86\Debug\My90Tank.pdb
 C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\obj\x86\Debug\My90Tank.start.resources
 C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\obj\x86\Debug\My90Tank.csprojResolveAssemblyReference.cache
+C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\bin\Debug\My90Tank.exe.config
+C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\bin\Debug\CSkin.dll
+C:\Users\John\Desktop\坦克设计\MyTank\My90Tank\My90Tank\bin\Debug\CSkin.xml

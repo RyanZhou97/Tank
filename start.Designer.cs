@@ -58,7 +58,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::My90Tank.Properties.Resources.select;
-            this.pictureBox1.Location = new System.Drawing.Point(38, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(35, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(146, 108);
             this.pictureBox1.TabIndex = 2;
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 331);
+            this.ClientSize = new System.Drawing.Size(392, 300);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);

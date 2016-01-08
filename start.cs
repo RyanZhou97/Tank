@@ -48,5 +48,10 @@ namespace My90Tank
             player.Stop();
             this.Close();
         }
+
+        private void skinButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
