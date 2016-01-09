@@ -71,7 +71,7 @@
             this.textBox1.Size = new System.Drawing.Size(98, 21);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "new.map";
-            this.textBox1.TextChanged += new System.EventHandler(this.ConfigMapForm_Load);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button2
             // 

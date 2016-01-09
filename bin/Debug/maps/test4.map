@@ -1,0 +1,9 @@
+﻿<map>
+  <modules>
+    <module x="300" y="540" type="Steel" />
+    <module x="300" y="480" type="Steel" />
+    <module x="420" y="480" type="Steel" />
+    <module x="360" y="480" type="Steel" />
+    <module x="420" y="540" type="Steel" />
+  </modules>
+</map>

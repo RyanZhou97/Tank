@@ -175,6 +175,11 @@ namespace My90Tank
             Application.Restart();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }
