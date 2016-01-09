@@ -11,16 +11,17 @@ namespace My90Tank
 {
     public class Scene          //描述场景
     {
+        public string selectedMap = null;
         public static int MAX_ENEMY_NUMBER = 20;
-        private P1Player play1 = new P1Player(240, 540, 3, 6, 1, DIRECTION.UP);
+        public List<string> maps = new List<string>();
+        private P1Player play1 = new P1Player(240, 540, 3, 10, 1, DIRECTION.UP);
        //private P2Player play2 = new P2Player(480, 540, 3, 6, 1, DIRECTION.UP);
         private P2Player play2 = new P2Player(480, 540, 3, 6, 1, DIRECTION.UP);
         private Symbol symbol = new Symbol(360, 560);
         private static int numflag=0;               //单双人模式
-        private int bossflag = 0;                   //BOSS
         public int killnum =0;
-        public int pvp=0;                           //PVP模式FLAG
-        public int normalmod = 0;                   //单双人模式FLAG
+        public int pvp=0;
+        private int normalmode = 0;
         public Boss boss;
         private List<Water> waterList = new List<Water>();//水
         private List<Wall> wallList = new List<Wall>();   //墙
@@ -29,7 +30,29 @@ namespace My90Tank
         private List<Enemy> enemyList = new List<Enemy>();//敌人
         private List<Missile> missileList = new List<Missile>();//子弹
         private List<Missile> deadMissiles = new List<Missile>();
-        private List<Star> starList = new List<Star>(); 
+        private List<Star> starList = new List<Star>();
+        public Symbol Symbol
+        {
+            get
+            {
+                return symbol;
+            }
+            set
+            {
+                symbol = value;
+            }
+        }
+        public int Normalmode 
+        { 
+            get 
+            {
+            return normalmode;
+            }
+            set
+            {
+                    normalmode= value;
+             }
+        }
         public int NumFlag     
         {
             get
@@ -64,17 +87,6 @@ namespace My90Tank
             set
             {
                 play2 = value;
-            }
-        }
-        public Symbol basesymbol
-        {
-            get
-            {
-                return symbol;
-            }
-            set
-            {
-                symbol = value;
             }
         }
         public List<Star> STAR
@@ -416,22 +428,10 @@ namespace My90Tank
                     return;
                 }
             }
-            //子弹打中老鹰
-            if (basesymbol != null&&pvp==0)
-            {
-                if (m.GetRectangle().IntersectsWith(basesymbol.GetRectangle()))
-                {
-                    //打击声
-                    SoundPlayer hitsound = new SoundPlayer(Resources.hit);
-                    hitsound.Play();
-                    basesymbol = null;
-                    deadMissiles.Add(m);
-                    return;
-                }
-            } 
+            
             //子弹打中P1Play
             if(P1Play!=null)
-            if (m.GetRectangle().IntersectsWith(P1Play.GetRectangle())&&P1Play.bornTime==16)
+            if (m.GetRectangle().IntersectsWith(P1Play.GetRectangle()))
             {
                 //打击声
                 SoundPlayer hitsound = new SoundPlayer(Resources.hit);
@@ -439,17 +439,23 @@ namespace My90Tank
                 //子弹移除
                 deadMissiles.Add(m);
                 //被击中扣血复活，当前版本只有一滴血直接死亡 复活
-                P1Play.life--;
-                if (P1Play.life >= 0)   //还有命就复活，不然狗带吧
+                if (P1Play.bornTime >= 16) //如果还在闪光 则无敌
                 {
-                    P1Play.bornTime = 0;
-                    P1Play.X=240;
-                    P1Play.Y = 540;
-                 }
-                else                    //狗带
-                {
-                    P1Play = null;
-                }
+                    P1Play.life--;
+                    SoundPlayer deadsound = new SoundPlayer(Resources.Bang);
+                    deadsound.Play();
+                    if (P1Play.life >= 0)   //还有命就复活，不然狗带吧
+                    {
+                        P1Play.bornTime = 0;
+                        P1Play.X = 240;
+                        P1Play.Y = 540;
+                        P1Play.direct = DIRECTION.UP;
+                    }
+                    else                    //狗带
+                    {
+                        P1Play = null;
+                    }
+               }
 
                 //  P1Play.
                 //MessageBox.Show("Game Over!");
@@ -457,7 +463,7 @@ namespace My90Tank
             }
              //子弹打中P2Play
             if(P2Play!=null)
-                if (m.GetRectangle().IntersectsWith(P2Play.GetRectangle()) && P2Play.bornTime == 16)
+            if (m.GetRectangle().IntersectsWith(P2Play.GetRectangle()))
             {
                 //打击声
                 SoundPlayer hitsound = new SoundPlayer(Resources.hit);
@@ -465,16 +471,23 @@ namespace My90Tank
                 //子弹移除
                 deadMissiles.Add(m);
                 //被击中扣血复活，当前版本只有一滴血直接死亡 复活
-                P2Play.life--;
-                if (P2Play.life >= 0)   //还有命就复活，不然狗带吧
+                if (P2Play.bornTime >= 16) //如果还在闪光 则无敌
                 {
-                    P2Play.bornTime = 0;
-                    P2Play.X = 480;
-                    P2Play.Y = 540;
-                }
-                else                    //狗带
-                {
-                    P2Play = null;
+                    P2Play.life--;
+                    SoundPlayer deadsound = new SoundPlayer(Resources.Bang);
+                    deadsound.Play();
+                    if (P2Play.life >= 0)   //还有命就复活，不然狗带吧
+                    {
+
+                        P2Play.bornTime = 0;
+                        P2Play.X = 480;
+                        P2Play.Y = 540;
+                        P2Play.direct = DIRECTION.UP;
+                    }
+                    else                    //狗带
+                    {
+                        P2Play = null;
+                    }
                 }
               //  P2Play.
                 //MessageBox.Show("Game Over!");
@@ -491,7 +504,7 @@ namespace My90Tank
                     //移除敌人，当前小兵默认一点生命值，直接移除
                     enemyList.RemoveAt(i);
                     //死亡音效
-                    SoundPlayer deadsound = new SoundPlayer(Resources.blast);
+                    SoundPlayer deadsound = new SoundPlayer(Resources.Bang);
                     deadsound.Play();
                     
                     i--;
@@ -501,6 +514,19 @@ namespace My90Tank
                 }
             }
             //打BOSS
+            //打老鹰
+            if (symbol != null)
+            {
+                if (m.GetRectangle().IntersectsWith(symbol.GetRectangle()))
+                {
+                    //打击声
+                    SoundPlayer hitsound = new SoundPlayer(Resources.hit);
+                    hitsound.Play();
+                    symbol = null;
+                    deadMissiles.Add(m);
+                    return;
+                }
+            }
             if (boss != null)
             {
                 if (m.GetRectangle().IntersectsWith(boss.GetRectangle()))
@@ -512,7 +538,7 @@ namespace My90Tank
                     if (boss.life <= 0) //BOSS死亡
                     {
                         //死亡音效
-                        SoundPlayer deadsound1 = new SoundPlayer(Resources.blast);
+                        SoundPlayer deadsound1 = new SoundPlayer(Resources.Bang);
                         deadsound1.Play();
                         boss = null;
                         //杀死BOSS即胜利
@@ -525,6 +551,7 @@ namespace My90Tank
             //子弹进入边缘
             if (m.X == 0 || m.Y == 0 || m.X >= ParamSetting.Map_Width || m.Y >= ParamSetting.Map_Height)
                 deadMissiles.Add(m);
+            //满足条件召唤BOSS
 
          //   if (enemyList.Count == 0)
         //    {

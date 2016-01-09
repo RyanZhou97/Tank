@@ -10,7 +10,6 @@ namespace My90Tank
     public class Enemy:Member
     {
         private  const int BORNTIME = 24;
-        private int bornTime = 0;
         public static Image[] bornImages = new Image[] { Resources.born1, Resources.born2, Resources.born3, Resources.born4 };
 
         private static TankType[] tankType = new TankType[] { new TankType(6, 2, 2), new TankType(12, 1, 2), new TankType(4,6, 2) };

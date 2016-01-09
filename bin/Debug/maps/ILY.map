@@ -1,0 +1,33 @@
+﻿<map>
+  <modules>
+    <module x="480" y="120" type="Steel" />
+    <module x="540" y="180" type="Steel" />
+    <module x="600" y="240" type="Steel" />
+    <module x="660" y="180" type="Steel" />
+    <module x="720" y="120" type="Steel" />
+    <module x="600" y="300" type="Steel" />
+    <module x="600" y="360" type="Steel" />
+    <module x="0" y="120" type="Steel" />
+    <module x="60" y="120" type="Steel" />
+    <module x="120" y="120" type="Steel" />
+    <module x="60" y="180" type="Steel" />
+    <module x="60" y="240" type="Steel" />
+    <module x="60" y="300" type="Steel" />
+    <module x="60" y="360" type="Steel" />
+    <module x="0" y="360" type="Steel" />
+    <module x="120" y="360" type="Steel" />
+    <module x="240" y="120" type="Steel" />
+    <module x="240" y="180" type="Steel" />
+    <module x="240" y="240" type="Steel" />
+    <module x="240" y="300" type="Steel" />
+    <module x="240" y="360" type="Steel" />
+    <module x="300" y="360" type="Steel" />
+    <module x="360" y="360" type="Steel" />
+    <module x="420" y="360" type="Steel" />
+    <module x="300" y="540" type="Steel" />
+    <module x="300" y="480" type="Steel" />
+    <module x="360" y="480" type="Steel" />
+    <module x="420" y="480" type="Steel" />
+    <module x="420" y="540" type="Steel" />
+  </modules>
+</map>

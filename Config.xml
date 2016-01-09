@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<main>
+  <types>
+    <type name="Grass" belong=""></type>
+    <type name="Wall" belong=""></type>
+    <type name="Water" belong=""></type>
+    <type name="Steel" belong=""></type>
+
+  </types>
+</main> 

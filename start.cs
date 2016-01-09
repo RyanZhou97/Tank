@@ -27,21 +27,42 @@ namespace My90Tank
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Scene.Instance.normalmod = 1;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void skinButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Scene.Instance.Normalmode = 1;
+            Scene.Instance.NumFlag = 0;
+            player.Stop();
+            this.Close();
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            Scene.Instance.Normalmode = 1;
             Scene.Instance.NumFlag = 1;
             player.Stop();
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Scene.Instance.normalmod = 1;
-            Scene.Instance.NumFlag = 0;
-            player.Stop();
-            this.Close();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
             Scene.Instance.NumFlag = 1;
             Scene.Instance.pvp = 1;
@@ -49,9 +70,10 @@ namespace My90Tank
             this.Close();
         }
 
-        private void skinButton1_Click(object sender, EventArgs e)
+        private void pictureBox5_Click(object sender, EventArgs e)
         {
-
+            ConfigMapForm configmap = new ConfigMapForm();
+            configmap.Show();
         }
     }
 }

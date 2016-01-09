@@ -51,6 +51,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ConfigMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigMapForm.Designer.cs">
+      <DependentUpon>ConfigMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factory.cs" />
+    <Compile Include="mapchose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mapchose.Designer.cs">
+      <DependentUpon>mapchose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nomallose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nomallose.Designer.cs">
+      <DependentUpon>nomallose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nomalwin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nomalwin.Designer.cs">
+      <DependentUpon>nomalwin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Star.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Element.cs" />
@@ -81,8 +106,20 @@
     <Compile Include="Symbol.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Water.cs" />
+    <EmbeddedResource Include="ConfigMapForm.resx">
+      <DependentUpon>ConfigMapForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mapchose.resx">
+      <DependentUpon>mapchose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nomallose.resx">
+      <DependentUpon>nomallose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nomalwin.resx">
+      <DependentUpon>nomalwin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -281,10 +318,12 @@
     <None Include="BossL.jpg" />
     <None Include="BossR.jpg" />
     <None Include="BossU.jpg" />
+    <None Include="Config.xml" />
     <Content Include="Properties\BossD.jpg" />
     <Content Include="Properties\BossL.jpg" />
     <Content Include="Properties\BossR.jpg" />
     <Content Include="Properties\BossU.jpg" />
+    <None Include="Resource\Bang.wav" />
     <Content Include="Resource\BossD.jpg" />
     <Content Include="Resource\BossL.jpg" />
     <Content Include="Resource\BossR.jpg" />

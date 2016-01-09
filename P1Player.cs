@@ -17,7 +17,7 @@ namespace My90Tank
         public static Image[] bornImages = new Image[] {Resources.born1,Resources.born2,Resources.born3,Resources.born4};
         private bool isMove = false;
         public const int myTankBornTime = 16;
-        private int lifeNum = 3;
+   //     private int lifeNum = 3;
         public P1Player(int x,int y, int life, int speed, int power,DIRECTION direct)
             :base(x,y,life,speed,power,direct)
         {

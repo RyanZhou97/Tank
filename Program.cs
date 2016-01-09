@@ -15,6 +15,7 @@ namespace My90Tank
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new mapchose());
             Application.Run(new start());
             Application.Run(new Form1());
         }

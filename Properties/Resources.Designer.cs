@@ -72,6 +72,15 @@ namespace My90Tank.Properties {
         /// <summary>
         ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
         /// </summary>
+        public static System.IO.UnmanagedMemoryStream Bang {
+            get {
+                return ResourceManager.GetStream("Bang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
+        /// </summary>
         public static System.IO.UnmanagedMemoryStream blast {
             get {
                 return ResourceManager.GetStream("blast", resourceCulture);
@@ -271,6 +280,28 @@ namespace My90Tank.Properties {
             get {
                 object obj = ResourceManager.GetObject("BossU", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;main&gt;
+        ///  &lt;types&gt;
+        ///    &lt;type name=&quot;player&quot; belong=&quot;tank&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;home&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;enemytank&quot; belong=&quot;tank&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;brickcombo_4&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;cementcombo_4&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;grasscombo_4&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;watercombo_4&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///
+        ///    &lt;type name=&quot;brickcombo_2l&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name=&quot;cementcombo_2l&quot; belong=&quot;&quot;&gt;&lt;/type&gt;
+        ///    &lt;type name [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string Config {
+            get {
+                return ResourceManager.GetString("Config", resourceCulture);
             }
         }
         
